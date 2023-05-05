@@ -151,11 +151,14 @@ async function postPRComment(results, repo, prNumber, octokit, commentWithQuerie
             body: message
         });
     } else {
-        await octokit.rest.issues.createComment({
-            ...repo,
-            issue_number: prNumber,
-            body: message
-        });
+        if(results.length)
+        {
+            await octokit.rest.issues.createComment({
+                ...repo,
+                issue_number: prNumber,
+                body: message
+            });
+        }
     }
 }
 
